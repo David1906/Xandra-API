@@ -20,6 +20,7 @@ password=Epd2$d4gny!
 https://www.ceos3c.com/linux/mount-cifs-permission-denied-linux/
 
 ## Dependencias
+Xampp
 pip install watchdog
 pip install flask_restful
 pip install python-dotenv
@@ -27,3 +28,6 @@ pip install waitress
 
 ## Daemonize
 https://stackoverflow.com/questions/6337119/how-do-you-daemonize-a-flask-application
+
+## Autostart Xampp
+https://haneefputtur.com/auto-start-xampp-in-centos-6-4.html
