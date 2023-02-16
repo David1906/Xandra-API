@@ -31,3 +31,26 @@ https://stackoverflow.com/questions/6337119/how-do-you-daemonize-a-flask-applica
 
 ## Autostart Xampp
 https://haneefputtur.com/auto-start-xampp-in-centos-6-4.html
+
+## xampp.service
+[Unit]
+Description = Xampp server
+
+[Service]
+ExecStart =/opt/lampp/lampp start
+ExecStop =/opt/lampp/lampp stop
+Type=forking
+  
+[Install]
+WantedBy = multi-user.target
+
+## xandra_api.service
+[Unit]
+Description = api to monitor and calculate fbt yield based on log files
+
+[Service]
+ExecStart =/usr/local/bin/python3 /usr/local/Foxconn/automation/Xandra-API/xandra_api.py
+Restart=on-failure
+  
+[Install]
+WantedBy = multi-user.target

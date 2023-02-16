@@ -38,7 +38,9 @@ class TestData:
                         continue
 
                     if test.fixtureIp == None and self.search("FixtureIP", line):
-                        test.fixtureIp = self.extractValue(line)
+                        value  = self.extractValue(line)
+                        if value != "":
+                            test.fixtureIp = value
                         continue
 
                     if test.status == None and self.search("result", line):
