@@ -15,8 +15,9 @@ class YieldCalculator(Resource):
                 "fixtureIp": fixtureIp,
                 "yield": round(self.testData.getYield(fixtureIp), 2),
                 "areLastTestPass": self.testData.areLastTestPass(
-                    fixtureIp, request.args["lastTestPassQty"]
+                    fixtureIp, int(request.args["lastTestPassQty"])
                 ),
             }
         except Exception as e:
             logging.error(str(e))
+            return "Bad request", 400

@@ -10,7 +10,7 @@ class TestData:
     def __init__(self) -> None:
         self.mySqlConnector = MySqlConnector()
 
-    def parse(self, fullPath) -> Test:
+    def parse(self, fullPath: str) -> Test:
         try:
             with open(fullPath, "r") as fp:
                 test = Test()
@@ -38,7 +38,7 @@ class TestData:
                         continue
 
                     if test.fixtureIp == None and self.search("FixtureIP", line):
-                        value  = self.extractValue(line)
+                        value = self.extractValue(line)
                         if value != "":
                             test.fixtureIp = value
                         continue
@@ -61,7 +61,7 @@ class TestData:
             logging.error(str(e))
             return Test()
 
-    def search(self, pattern, string):
+    def search(self, pattern: str, string: str) -> bool:
         return re.search(pattern, string, re.IGNORECASE) != None
 
     def extractDateTime(self, line: str) -> datetime:
@@ -93,7 +93,7 @@ class TestData:
         db.cursor().execute(sql)
         db.commit()
 
-    def getYield(self, fixtureIp, qty=10):
+    def getYield(self, fixtureIp: str, qty: int = 10) -> float:
         tests = self.find(fixtureIp, qty)
         if len(tests) == 0:
             return 100
@@ -103,14 +103,15 @@ class TestData:
                 passTests += 1
         return (passTests / len(tests)) * 100
 
-    def areLastTestPass(self, fixtureIp, qty=3) -> bool:
+    def areLastTestPass(self, fixtureIp: str, qty: int = 3) -> bool:
         tests = self.find(fixtureIp, qty)
-        for test in tests:
-            if not test["status"]:
-                return False
+        if len(tests) >= qty:
+            for test in tests:
+                if not test["status"]:
+                    return False
         return True
 
-    def find(self, fixtureIp, qty=10):
+    def find(self, fixtureIp: str, qty: int = 10) -> "list[Test]":
         db = self.mySqlConnector.getConnector()
         cursor = db.cursor(dictionary=True)
         cursor.execute(
