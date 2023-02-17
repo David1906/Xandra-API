@@ -10,11 +10,7 @@ class SfcEventHandler(FileSystemEventHandler):
 
     def on_created(self, event):
         try:
-            print(f"Created -> {event.src_path}")
             test = self.testData.parse(event.src_path)
             self.testData.add(test)
         except Exception as e:
             logging.error(str(e))
-
-    def on_deleted(self, event):
-        print(f"Deleted -> {event.src_path}")
