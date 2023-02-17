@@ -10,6 +10,10 @@ class YieldCalculator(Resource):
 
     def get(self):
         try:
+            for argument in ["fixtureIp", "lastTestPassQty"]:
+                if not argument in request.args:
+                    return {"message": f"Argument required: {argument}"}, 400
+
             fixtureIp = request.args["fixtureIp"]
             return {
                 "fixtureIp": fixtureIp,
@@ -20,4 +24,4 @@ class YieldCalculator(Resource):
             }
         except Exception as e:
             logging.error(str(e))
-            return "Bad request", 400
+            return {"message": f"Internal error: {str(e)}"}, 500
