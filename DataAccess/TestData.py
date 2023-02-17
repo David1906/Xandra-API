@@ -101,7 +101,7 @@ class TestData:
         for test in tests:
             if test["status"]:
                 passTests += 1
-        return (passTests / len(tests)) * 100
+        return round((passTests / len(tests)) * 100, 2)
 
     def areLastTestPass(self, fixtureIp: str, qty: int = 3) -> bool:
         tests = self.find(fixtureIp, qty)

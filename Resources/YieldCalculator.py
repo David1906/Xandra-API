@@ -10,14 +10,16 @@ class YieldCalculator(Resource):
 
     def get(self):
         try:
-            for argument in ["fixtureIp", "lastTestPassQty"]:
+            for argument in ["fixtureIp", "yieldCalcQty", "lastTestPassQty"]:
                 if not argument in request.args:
                     return {"message": f"Argument required: {argument}"}, 400
 
             fixtureIp = request.args["fixtureIp"]
             return {
                 "fixtureIp": fixtureIp,
-                "yield": round(self.testData.getYield(fixtureIp), 2),
+                "yield": self.testData.getYield(
+                    fixtureIp, int(request.args["yieldCalcQty"])
+                ),
                 "areLastTestPass": self.testData.areLastTestPass(
                     fixtureIp, int(request.args["lastTestPassQty"])
                 ),
