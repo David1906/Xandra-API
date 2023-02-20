@@ -2,6 +2,7 @@ import logging, os
 from flask import Flask
 from flask_restful import Api
 from waitress import serve
+from Resources.TestResource import TestResource
 from Resources.YieldCalculator import YieldCalculator
 from Utils.FileWatchdog import FileWatchdog
 from Utils.SfcEventHandler import SfcEventHandler
@@ -13,6 +14,7 @@ logging.basicConfig(filename="log.txt", level=logging.ERROR)
 app = Flask(__name__)
 api = Api(app)
 api.add_resource(YieldCalculator, "/yield")
+api.add_resource(TestResource, "/test")
 
 if __name__ == "__main__":
     FileWatchdog(SfcEventHandler()).start(config["FBT_LOGS_PATH"])
