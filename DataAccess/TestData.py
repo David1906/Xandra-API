@@ -1,5 +1,6 @@
 import logging, re
 from datetime import datetime
+from DataAccess.GoogleSheet import GoogleSheet
 from DataAccess.MySqlConnector import MySqlConnector
 from Models.Test import Test
 
@@ -95,6 +96,7 @@ class TestData:
         db.commit()
         cursor.close()
         db.close()
+        GoogleSheet().add(test)
 
     def getYield(self, fixtureIp: str, qty: int = 10) -> float:
         tests = self.find(fixtureIp, qty)

@@ -18,7 +18,7 @@ class FileWatchdog:
         self.observer.join()
 
     def start(self, path):
-        self.observer.schedule(self.eventHandler, path, recursive=True)
+        self.observer.schedule(self.eventHandler, path, recursive=False)
         self.observer.start()
 
     def stop(self):

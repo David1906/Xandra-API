@@ -56,3 +56,9 @@ Restart=on-failure
   
 [Install]
 WantedBy = multi-user.target
+
+## Google sheets
+david.ascencio.foxconn@gmail.com
+Foxconn#231
+pip3 install --upgrade google-api-python-client oauth2client
+pip3 install gspread
