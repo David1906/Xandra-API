@@ -3,7 +3,7 @@ from flask_restful import Resource, request
 from DataAccess.TestData import TestData
 
 
-class YieldCalculator(Resource):
+class YieldResource(Resource):
     def __init__(self) -> None:
         super().__init__()
         self.testData = TestData()

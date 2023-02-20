@@ -3,7 +3,7 @@ from flask import Flask
 from flask_restful import Api
 from waitress import serve
 from Resources.TestResource import TestResource
-from Resources.YieldCalculator import YieldCalculator
+from Resources.YieldResource import YieldResource
 from Utils.FileWatchdog import FileWatchdog
 from Utils.SfcEventHandler import SfcEventHandler
 from dotenv import dotenv_values
@@ -13,7 +13,7 @@ logging.basicConfig(filename="log.txt", level=logging.ERROR)
 
 app = Flask(__name__)
 api = Api(app)
-api.add_resource(YieldCalculator, "/yield")
+api.add_resource(YieldResource, "/yield")
 api.add_resource(TestResource, "/test")
 
 if __name__ == "__main__":
