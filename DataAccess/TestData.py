@@ -90,8 +90,11 @@ class TestData:
             '{test.stepLabel}',
             '{test.operator}'
         )"""
-        db.cursor().execute(sql)
+        cursor = db.cursor()
+        cursor.execute(sql)
         db.commit()
+        cursor.close()
+        db.close()
 
     def getYield(self, fixtureIp: str, qty: int = 10) -> float:
         tests = self.find(fixtureIp, qty)
@@ -117,4 +120,7 @@ class TestData:
         cursor.execute(
             f"SELECT * FROM `tests` WHERE fixtureIp='{fixtureIp}' ORDER BY endTime DESC LIMIT {qty};"
         )
-        return cursor.fetchall()
+        data = cursor.fetchall()
+        cursor.close()
+        db.close()
+        return data
