@@ -24,14 +24,15 @@ class GoogleSheet:
                     "",
                     test.serialNumber,
                     test.project,
-                    test.startTime,
-                    test.endTime,
+                    test.startTime.strftime("%Y-%m-%d %H:%M:%S.%f"),
+                    test.endTime.strftime("%Y-%m-%d %H:%M:%S.%f"),
                     test.codeVersion,
                     test.fixtureIp,
                     "PASS" if test.status else "FAILED",
                     test.stepLabel,
                     test.operator,
-                ]
+                ],
+                value_input_option="USER_ENTERED",
             )
         except Exception as e:
             logging.error("Error appending google sheet. " + str(e))

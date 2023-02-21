@@ -1,3 +1,4 @@
+from datetime import datetime
 import re
 
 
@@ -6,8 +7,8 @@ class Test:
         self,
         serialNumber: str = None,
         project: str = None,
-        startTime: str = None,
-        endTime: str = None,
+        startTime: datetime = None,
+        endTime: datetime = None,
         codeVersion: str = None,
         fixtureIp: str = None,
         status: bool = None,
