@@ -116,13 +116,25 @@ class TestData:
                     return False
         return True
 
-    def find(self, fixtureIp: str, qty: int = 10) -> "list[Test]":
+    def find(
+        self, fixtureIp: str, qty: int = 10, onlyFailures: bool = False
+    ) -> "list[Test]":
         db = self.mySqlConnector.getConnector()
         cursor = db.cursor(dictionary=True)
         cursor.execute(
-            f"SELECT * FROM `tests` WHERE fixtureIp='{fixtureIp}' ORDER BY endTime DESC LIMIT {qty};"
+            f"""
+            SELECT * 
+            FROM `tests` 
+            WHERE 
+                fixtureIp='{fixtureIp}'
+                {"" if onlyFailures == False else "AND status=0"}
+            ORDER BY endTime 
+            DESC LIMIT {qty};"""
         )
         data = cursor.fetchall()
         cursor.close()
         db.close()
         return data
+
+    def findFailures(self, fixtureIp: str, qty: int = 10) -> "list[Test]":
+        return self.find(fixtureIp, qty, onlyFailures=True)

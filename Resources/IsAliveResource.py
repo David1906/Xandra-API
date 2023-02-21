@@ -2,7 +2,7 @@ from flask_restful import Resource
 from DataAccess.TestData import TestData
 
 
-class TestResource(Resource):
+class IsAliveResource(Resource):
     def __init__(self) -> None:
         super().__init__()
         self.testData = TestData()
