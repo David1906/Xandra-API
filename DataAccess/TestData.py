@@ -51,7 +51,7 @@ class TestData:
                         ).strip()
                         continue
 
-                    if test.operator == None and self.search("Operator\s*ID", line):
+                    if test.operator == None and self.search("OperatorID", line):
                         test.operator = self.extractValue(line)
                         continue
 
@@ -68,7 +68,7 @@ class TestData:
     def extractDateTime(self, line: str) -> datetime:
         value = self.extractValue(line)
         dt = datetime.strptime(value, "%Y%m%d_%H%M%S")
-        return dt.isoformat()
+        return dt
 
     def extractValue(self, line: str) -> str:
         return line.split(":")[1].strip()
