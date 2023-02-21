@@ -110,7 +110,7 @@ class TestData:
 
     def areLastTestPass(self, fixtureIp: str, qty: int = 3) -> bool:
         tests = self.find(fixtureIp, qty)
-        if len(tests) >= qty:
+        if len(tests) > 0:
             for test in tests:
                 if not test["status"]:
                     return False
